@@ -1,0 +1,8 @@
+
+parameters:
+    acme_blog.per_page: ~
+
+#services:
+#    acme_blog.post_config:
+#        class: Acme\BlogBundle\Services\PostConfiguration
+#        arguments: ['%acme_blog.per_page%']

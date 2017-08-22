@@ -1,0 +1,26 @@
+{% extends 'AcmeBlogBundle::base.html.twig' %}
+
+{% block content %}
+
+    <h1>index page</h1>
+
+    {% for message in app.session.flashBag('post_deleted') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <a href="{{ path('acme_create') }}" class="btn btn-success">Add +</a>
+
+    <ul class="list-group">
+        {% for post in posts %}
+
+            <li class="list-group-item">
+                {{ post.title }}
+                <a class="btn btn-danger btn-sm" href="{{ path('acme_delete', {'id': post.id}) }}">Delete</a>
+            </li>
+
+        {% endfor %}
+    </ul>
+
+{% endblock %}
