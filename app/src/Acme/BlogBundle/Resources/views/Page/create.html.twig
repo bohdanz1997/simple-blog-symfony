@@ -1,8 +1,6 @@
-{% extends 'AcmeBlogBundle::base.html.twig' %}
+{% extends 'AcmeBlogBundle:layout:base.html.twig' %}
 
 {% block content %}
-    {{ 554534566345 | price }}
-    {{ simple('hard') }}
     <h3>Create new post with comments</h3>
     {{ form_start(form, {'attr': {'class': 'form-horisontal'}}) }}
         {{ form_row(form.title) }}
@@ -38,6 +36,7 @@
 
 {% block js %}
 
-<script src="{{ asset('js/script.js') }}"></script>
+    {{ parent() }}
+    <script src="{{ asset('js/script.js') }}"></script>
 
 {% endblock %}
