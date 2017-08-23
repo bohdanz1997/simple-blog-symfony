@@ -4,6 +4,7 @@ namespace Acme\BlogBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Post
@@ -26,6 +27,8 @@ class Post
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(min=3)
      */
     private $title;
 

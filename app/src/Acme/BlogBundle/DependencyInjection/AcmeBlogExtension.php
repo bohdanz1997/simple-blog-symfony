@@ -25,16 +25,6 @@ class AcmeBlogExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-//        $config = array();
-//        foreach ($configs as $subConfig) {
-//            $config = array_merge($config, $subConfig);
-//        }
-
-        if (!isset($config['posts_per_page'])) {
-            throw new \InvalidArgumentException('The "posts_per_page" option must be set');
-        }
-
-        // такой себе маппинг параметра
         $container->setParameter('acme_blog.per_page', $config['posts_per_page']);
     }
 }

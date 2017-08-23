@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Acme\BlogBundle\Entity\Post;
+use Symfony\Component\Serializer\Serializer;
 
 class PostController extends Controller
 {
@@ -15,6 +16,7 @@ class PostController extends Controller
      */
     public function indexAction()
     {
+
         $posts = $this->getDoctrine()
             ->getRepository(Post::class)
             ->findAll();
@@ -37,7 +39,7 @@ class PostController extends Controller
             ->findBy([], ['id' => 'desc'],
                 $this->getParameter('acme_blog.per_page'));
 
-        if ($form->isValid() && $form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $entity = $form->getData();
             $em = $this->getDoctrine()->getManager();
             
