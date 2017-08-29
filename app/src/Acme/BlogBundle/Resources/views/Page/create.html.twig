@@ -25,6 +25,7 @@
             <li class="list-group-item">
                 {{ post.title }}
                 <span class="float-right">
+                    <a href="{{ path('acme_update', {'id': post.id}) }}" class="btn btn-primary btn-sm">Edit</a>
                     <a href="{{ path('acme_delete', {'id': post.id}) }}" class="btn btn-danger btn-sm">Delete</a>
                 </span>
             </li>

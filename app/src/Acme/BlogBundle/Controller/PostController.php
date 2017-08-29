@@ -7,7 +7,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Acme\BlogBundle\Entity\Post;
-use Symfony\Component\Serializer\Serializer;
 
 class PostController extends Controller
 {
@@ -16,7 +15,6 @@ class PostController extends Controller
      */
     public function indexAction()
     {
-
         $posts = $this->getDoctrine()
             ->getRepository(Post::class)
             ->findAll();
@@ -37,12 +35,13 @@ class PostController extends Controller
         $posts = $this->getDoctrine()
             ->getRepository(Post::class)
             ->findBy([], ['id' => 'desc'],
-                $this->getParameter('acme_blog.per_page'));
+                $this->getParameter('acme_blog.per_page')
+            );
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isValid()) {
             $entity = $form->getData();
             $em = $this->getDoctrine()->getManager();
-            
+
             $em->persist($entity);
             $em->flush();
 
@@ -52,6 +51,30 @@ class PostController extends Controller
         return $this->render('AcmeBlogBundle:Page:create.html.twig', [
             'form' => $form->createView(),
             'posts' => $posts
+        ]);
+    }
+
+    /**
+     * @Route("/update/{id}", name="acme_update")
+     */
+    public function updateAction(Post $post, Request $request)
+    {
+        $form = $this->createForm(PostType::class, $post);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $entity = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($entity);
+            $em->flush();
+
+            return $this->redirectToRoute('acme_create');
+        }
+
+        return $this->render('@AcmeBlog/Page/edit.html.twig', [
+           'form' => $form->createView(),
+           'post' => $post
         ]);
     }
 

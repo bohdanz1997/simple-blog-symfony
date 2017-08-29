@@ -17,7 +17,10 @@
 
             <li class="list-group-item">
                 {{ post.title }}
-                <a class="btn btn-danger btn-sm" href="{{ path('acme_delete', {'id': post.id}) }}">Delete</a>
+                <span class="float-right">
+                    <a href="{{ path('acme_update', {'id': post.id}) }}" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="{{ path('acme_delete', {'id': post.id}) }}" class="btn btn-danger btn-sm">Delete</a>
+                </span>
             </li>
 
         {% endfor %}

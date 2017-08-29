@@ -1,0 +1,19 @@
+{% extends 'AcmeBlogBundle:layout:base.html.twig' %}
+
+{% block content %}
+
+    <br>
+    <h3>Edit post: {{ post.title }}</h3>
+
+    {% for comment in post.comments %}
+        {{ comment.title }}
+    {% endfor %}
+
+    {% include '@AcmeBlog/Page/form.html.twig' %}
+
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}
+
